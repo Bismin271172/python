@@ -1,0 +1,14 @@
+import processing
+
+input = 'G:/My Drive/Colab Notebooks/gggi_stat_down/kittiphon/output/csv/LS_factor'
+output = 'G:/My Drive/Colab Notebooks/gggi_stat_down/kittiphon/output/shapefile'
+var_list = ['prec_','tmin_','tmax_']
+
+for var in var_list:
+    for i1 in range (0,12):
+        processing.run("qgis:idwinterpolation",\
+        {'INTERPOLATION_DATA':input+str(var)+'factor.shp::~::0::~::'+str(i1+3)+'::~::0',\
+        'DISTANCE_COEFFICIENT':3,\
+        'EXTENT':'98.78429,110.11858,12.93313,23.67472 [EPSG:4326]',\
+        'PIXEL_SIZE':0.044757,\
+        'OUTPUT':output+str(var)+'factor_'+str(i1+1)+'.tif'})
